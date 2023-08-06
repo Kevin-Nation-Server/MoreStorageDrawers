@@ -8,13 +8,15 @@ import javax.annotation.Nonnull;
 
 public enum EnumMod implements StringRepresentable {
     DEFAULT("none", DrawerMaterial.DEFAULT),
+    MINECRAFT("minecraft", DrawerMaterial.MINECRAFT_TERRACOTTA),
+    CREATE("create", DrawerMaterial.CREATE_ANDESITE_CASING),
     ARSNOUVEAU("ars_nouveau", DrawerMaterial.ARSNOUVEAU_ARCHWOOD),
     //ASTRALSORCERY("astralsorcery", DrawerMaterial.ASTRALSORCERY_INFUSED),
     BOTANIA("botania", DrawerMaterial.BOTANIA_LIVINGWOOD),
     //EIDOLON("eidolon", DrawerMaterial.EIDOLON_POLISHED),
     //HEXBLADES("hexblades", DrawerMaterial.HEXBLADES_DARK_POLISHED),
     NATURESAURA("naturesaura", DrawerMaterial.NATURESAURA_ANCIENT),
-    //TWILIGHTFOREST("twilightforest", DrawerMaterial.TWILIGHTFOREST_TOWER),
+    TWILIGHTFOREST("twilightforest", DrawerMaterial.TWILIGHTFOREST_TOWER),
     BIOMESOPLENTY("biomesoplenty", DrawerMaterial.BIOMESOPLENTY_FIR),
     //BETTERENDFORGE("betterendforge", DrawerMaterial.BETTERENDFORGE_MOSSY_GLOWSHRROM),
     //DESOLATION("desolation", DrawerMaterial.DESOLATION_CHARRED),

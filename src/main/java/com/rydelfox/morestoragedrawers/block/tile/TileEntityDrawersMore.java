@@ -4,7 +4,7 @@ import com.jaquadro.minecraft.storagedrawers.api.event.DrawerPopulatedEvent;
 import com.jaquadro.minecraft.storagedrawers.api.storage.IDrawer;
 import com.jaquadro.minecraft.storagedrawers.api.storage.IDrawerAttributes;
 import com.jaquadro.minecraft.storagedrawers.api.storage.IDrawerGroup;
-import com.jaquadro.minecraft.storagedrawers.block.tile.TileEntityDrawers;
+import com.jaquadro.minecraft.storagedrawers.block.tile.BlockEntityDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.tile.tiledata.StandardDrawerGroup;
 import com.jaquadro.minecraft.storagedrawers.inventory.ItemStackHelper;
 import com.rydelfox.morestoragedrawers.network.ItemUpdateMessage;
@@ -19,19 +19,17 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.network.PacketDistributor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.UUID;
 
-public class TileEntityDrawersMore extends TileEntityDrawers {
+public class TileEntityDrawersMore extends BlockEntityDrawers {
 
-    static Capability<IDrawerAttributes> DRAWER_ATTRIBUTES_CAPABILITY = null;
-
-    private long lastClickTime;
-    private UUID lastClickUUID;
+    static Capability<IDrawerAttributes> DRAWER_ATTRIBUTES_CAPABILITY = CapabilityManager.get(new CapabilityToken<>(){});
 
     public TileEntityDrawersMore (BlockEntityType<?> tileEntityType, BlockPos pos, BlockState state) {
         super(tileEntityType, pos, state);
@@ -41,7 +39,7 @@ public class TileEntityDrawersMore extends TileEntityDrawers {
         private GroupData groupData = new GroupData(1);
 
         public Slot1 (BlockPos pos, BlockState state) {
-            super(Tiles.Tile.MORE_DRAWERS_1, pos, state);
+            super(Tiles.MORE_DRAWERS_1.get(), pos, state);
             groupData.setCapabilityProvider(this);
             injectPortableData(groupData);
         }
@@ -62,7 +60,7 @@ public class TileEntityDrawersMore extends TileEntityDrawers {
         private GroupData groupData = new GroupData(2);
 
         public Slot2 (BlockPos pos, BlockState state) {
-            super(Tiles.Tile.MORE_DRAWERS_2, pos, state);
+            super(Tiles.MORE_DRAWERS_2.get(), pos, state);
             groupData.setCapabilityProvider(this);
             injectPortableData(groupData);
         }
@@ -83,7 +81,7 @@ public class TileEntityDrawersMore extends TileEntityDrawers {
         private GroupData groupData = new GroupData(4);
 
         public Slot4 (BlockPos pos, BlockState state) {
-            super(Tiles.Tile.MORE_DRAWERS_4, pos, state);
+            super(Tiles.MORE_DRAWERS_4.get(), pos, state);
             groupData.setCapabilityProvider(this);
             injectPortableData(groupData);
         }

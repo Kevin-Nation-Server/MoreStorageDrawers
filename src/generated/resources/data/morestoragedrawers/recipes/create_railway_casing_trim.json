@@ -1,0 +1,34 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "create"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "morestoragedrawers",
+        "key": {
+          "/": {
+            "tag": "forge:rods/wooden"
+          },
+          "X": {
+            "item": "create:railway_casing"
+          }
+        },
+        "pattern": [
+          "X/X",
+          "/X/",
+          "X/X"
+        ],
+        "result": {
+          "count": 4,
+          "item": "morestoragedrawers:create_railway_casing_trim"
+        }
+      }
+    }
+  ]
+}

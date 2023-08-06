@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "morestoragedrawers:blocks/create_copper_casing_side"
+  }
+}
