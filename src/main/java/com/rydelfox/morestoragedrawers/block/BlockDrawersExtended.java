@@ -1,7 +1,7 @@
 package com.rydelfox.morestoragedrawers.block;
 
 import com.jaquadro.minecraft.storagedrawers.StorageDrawers;
-import com.jaquadro.minecraft.storagedrawers.api.storage.*;
+import com.jaquadro.minecraft.storagedrawers.api.storage.IDrawer;
 import com.jaquadro.minecraft.storagedrawers.block.BlockDrawers;
 import com.jaquadro.minecraft.storagedrawers.config.ClientConfig;
 import com.jaquadro.minecraft.storagedrawers.config.CommonConfig;
@@ -12,25 +12,37 @@ import com.jaquadro.minecraft.storagedrawers.item.ItemKey;
 import com.jaquadro.minecraft.storagedrawers.item.ItemUpgrade;
 import com.rydelfox.morestoragedrawers.MoreStorageDrawers;
 import com.rydelfox.morestoragedrawers.block.tile.TileEntityDrawersMore;
+import net.minecraft.Util;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.phys.shapes.BooleanOp;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkHooks;
@@ -40,30 +52,18 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.Util;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
+import static com.jaquadro.minecraft.storagedrawers.util.WorldUtils.*;
 
-public abstract class BlockDrawersExtended extends BlockDrawers
-{
+public abstract class BlockDrawersExtended extends BlockDrawers {
 
     // TODO: TE.getModelData()
     //public static final IUnlistedProperty<DrawerStateModelData> STATE_MODEL = UnlistedModelData.create(DrawerStateModelData.class);
 
-    private static final VoxelShape AABB_FULL = Block.box(0, 0, 0, 16, 16, 16);
-    private static final VoxelShape AABB_NORTH_FULL = Shapes.join(AABB_FULL, Block.box(1, 1, 0, 15, 15, 1), BooleanOp.ONLY_FIRST);
-    private static final VoxelShape AABB_SOUTH_FULL = Shapes.join(AABB_FULL, Block.box(1, 1, 15, 15, 15, 16), BooleanOp.ONLY_FIRST);
-    private static final VoxelShape AABB_WEST_FULL = Shapes.join(AABB_FULL, Block.box(0, 1, 1, 1, 15, 15), BooleanOp.ONLY_FIRST);
-    private static final VoxelShape AABB_EAST_FULL = Shapes.join(AABB_FULL, Block.box(15, 1, 1, 16, 15, 15), BooleanOp.ONLY_FIRST);
+    //private static final VoxelShape AABB_FULL = Block.box(0, 0, 0, 16, 16, 16);
+    private static final VoxelShape AABB_NORTH_FULL = Shapes.join(Shapes.block(), Block.box(1, 1, 0, 15, 15, 1), BooleanOp.ONLY_FIRST);
+    private static final VoxelShape AABB_SOUTH_FULL = Shapes.join(Shapes.block(), Block.box(1, 1, 15, 15, 15, 16), BooleanOp.ONLY_FIRST);
+    private static final VoxelShape AABB_WEST_FULL = Shapes.join(Shapes.block(), Block.box(0, 1, 1, 1, 15, 15), BooleanOp.ONLY_FIRST);
+    private static final VoxelShape AABB_EAST_FULL = Shapes.join(Shapes.block(), Block.box(15, 1, 1, 16, 15, 15), BooleanOp.ONLY_FIRST);
     private static final VoxelShape AABB_NORTH_HALF = Block.box(0, 0, 8, 16, 16, 16);
     private static final VoxelShape AABB_SOUTH_HALF = Block.box(0, 0, 0, 16, 16, 8);
     private static final VoxelShape AABB_WEST_HALF = Block.box(8, 0, 0, 16, 16, 16);
@@ -71,19 +71,15 @@ public abstract class BlockDrawersExtended extends BlockDrawers
 
     private long ignoreEventTime;
 
-    private static final ThreadLocal<Boolean> inTileLookup = new ThreadLocal<Boolean>() {
-        @Override
-        protected Boolean initialValue () {
-            return false;
-        }
-    };
+    private static final ThreadLocal<Boolean> inTileLookup = ThreadLocal.withInitial(() -> false);
 
     public BlockDrawersExtended(int drawerCount, boolean halfDepth, int storageUnits, Block.Properties properties) {
         super(drawerCount, halfDepth, storageUnits, properties);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void initDynamic () { }
+    public void initDynamic() {
+    }
 
     public AABB[] getSlotGeometry() {
         return super.slotGeometry;
@@ -146,26 +142,28 @@ public abstract class BlockDrawersExtended extends BlockDrawers
     }
 
     @Override
-    public void setPlacedBy  (Level world, BlockPos pos, BlockState state, LivingEntity entity, ItemStack stack) {
+    public void setPlacedBy(Level world, BlockPos pos, BlockState state, LivingEntity entity, ItemStack stack) {
         super.setPlacedBy(world, pos, state, entity, stack);
     }
 
     @Override
-    public InteractionResult use (BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack item = player.getItemInHand(hand);
 
+        /*
         if (!(getTileEntitySafe(world, pos) instanceof TileEntityDrawersMore)) {
             return super.use(state, world, pos, player, hand, hit);
         }
+        */
         if (hand == InteractionHand.OFF_HAND)
             return InteractionResult.PASS;
 
-        if (world.isClientSide  && Util.getMillis() == ignoreEventTime) {
+        if (world.isClientSide && Util.getMillis() == ignoreEventTime) {
             ignoreEventTime = 0;
             return InteractionResult.PASS;
         }
 
-        TileEntityDrawersMore tileDrawers = (TileEntityDrawersMore)getTileEntitySafe(world, pos);
+        TileEntityDrawersMore tileDrawers = getBlockEntity(world, pos, TileEntityDrawersMore.class);
 
         //if (!SecurityManager.hasAccess(player.getGameProfile(), tileDrawers))
         //    return false;
@@ -174,7 +172,6 @@ public abstract class BlockDrawersExtended extends BlockDrawers
             StorageDrawers.log.info("BlockDrawers.onBlockActivated");
             StorageDrawers.log.info((item.isEmpty()) ? "  null item" : "  " + item.toString());
         }
-
 
         if (!item.isEmpty()) {
             if (item.getItem() instanceof ItemKey)
@@ -193,14 +190,14 @@ public abstract class BlockDrawersExtended extends BlockDrawers
             if (item.getItem() instanceof ItemUpgrade) {
                 if (!tileDrawers.upgrades().canAddUpgrade(item)) {
                     if (!world.isClientSide)
-                        player.displayClientMessage(new TranslatableComponent("message.storagedrawers.cannot_add_upgrade"), true);
+                        player.displayClientMessage(MutableComponent.create(new TranslatableContents("message.storagedrawers.cannot_add_upgrade")), true);
 
                     return InteractionResult.PASS;
                 }
 
                 if (!tileDrawers.upgrades().addUpgrade(item)) {
                     if (!world.isClientSide)
-                        player.displayClientMessage(new TranslatableComponent("message.storagedrawers.max_upgrades"), true);
+                        player.displayClientMessage(MutableComponent.create(new TranslatableContents("message.storagedrawers.max_upgrades")), true);
 
                     return InteractionResult.PASS;
                 }
@@ -230,8 +227,7 @@ public abstract class BlockDrawersExtended extends BlockDrawers
                     return false;
                 return true;
             }*/
-        }
-        else if (item.isEmpty() && player.isShiftKeyDown()) {
+        } else if (item.isEmpty() && player.isShiftKeyDown()) {
             MoreStorageDrawers.logInfo("Empty hand and sneaking");
             /*if (tileDrawers.isSealed()) {
                 tileDrawers.setIsSealed(false);
@@ -243,16 +239,15 @@ public abstract class BlockDrawersExtended extends BlockDrawers
             }*/
 
             if (CommonConfig.GENERAL.enableUI.get() && !world.isClientSide) {
-                NetworkHooks.openGui((ServerPlayer)player, new MenuProvider()
-                {
+                NetworkHooks.openScreen((ServerPlayer) player, new MenuProvider() {
                     @Override
-                    public Component getDisplayName () {
-                        return new TranslatableComponent(getDescriptionId());
+                    public Component getDisplayName() {
+                        return MutableComponent.create(new TranslatableContents(getDescriptionId()));
                     }
 
                     @Nullable
                     @Override
-                    public AbstractContainerMenu createMenu (int windowId, Inventory playerInv, Player playerEntity) {
+                    public AbstractContainerMenu createMenu(int windowId, Inventory playerInv, Player playerEntity) {
                         if (BlockDrawersExtended.super.getDrawerCount() == 1)
                             return new ContainerDrawers1(windowId, playerInv, tileDrawers);
                         else if (BlockDrawersExtended.super.getDrawerCount() == 2)
@@ -274,30 +269,26 @@ public abstract class BlockDrawersExtended extends BlockDrawers
         //if (tileDrawers.isSealed())
         //    return false;
 
-        int slot = getDrawerSlot(hit);
-        IDrawer drawer = tileDrawers.getGroup().getDrawer(slot);
+        int slot = getDrawerSlot(state, hit);
         tileDrawers.interactPutItemsIntoSlot(slot, player);
 
         if (item.isEmpty())
             player.setItemInHand(hand, ItemStack.EMPTY);
 
-
-        drawer = tileDrawers.getGroup().getDrawer(slot);
-
         return InteractionResult.SUCCESS;
     }
 
-    private Vec3 normalizeHitVec (Vec3 hit) {
+    private Vec3 normalizeHitVec(Vec3 hit) {
         return new Vec3(
-                ((hit.x < 0) ? hit.x - Math.floor(hit.x) : hit.x) % 1,
-                ((hit.y < 0) ? hit.y - Math.floor(hit.y) : hit.y) % 1,
-                ((hit.z < 0) ? hit.z - Math.floor(hit.z) : hit.z) % 1
+            ((hit.x < 0) ? hit.x - Math.floor(hit.x) : hit.x) % 1,
+            ((hit.y < 0) ? hit.y - Math.floor(hit.y) : hit.y) % 1,
+            ((hit.z < 0) ? hit.z - Math.floor(hit.z) : hit.z) % 1
         );
     }
 
     @Override
     public void attack(BlockState state, Level worldIn, BlockPos pos, Player playerIn) {
-        if(!(getTileEntitySafe(worldIn, pos) instanceof TileEntityDrawersMore)) {
+        if (getBlockEntity(worldIn, pos, TileEntityDrawersMore.class) == null) {
             super.attack(state, worldIn, pos, playerIn);
         }
         if (worldIn.isClientSide)
@@ -306,13 +297,13 @@ public abstract class BlockDrawersExtended extends BlockDrawers
         if (CommonConfig.GENERAL.debugTrace.get())
             StorageDrawers.log.info("onBlockClicked");
 
-        BlockHitResult rayResult = rayTraceEyes(worldIn, playerIn, playerIn.getAttribute(net.minecraftforge.common.ForgeMod.REACH_DISTANCE.get()).getValue() + 1);
+        BlockHitResult rayResult = rayTraceEyes(worldIn, playerIn, pos);
         if (rayResult.getType() == HitResult.Type.MISS)
             return;
 
         Direction side = rayResult.getDirection();
 
-        TileEntityDrawersMore tileDrawers = (TileEntityDrawersMore)getTileEntitySafe(worldIn, pos);
+        TileEntityDrawersMore tileDrawers = (TileEntityDrawersMore) getBlockEntity(worldIn, pos, TileEntityDrawersMore.class);
         if (state.getValue(FACING) != rayResult.getDirection())
             return;
 
@@ -322,7 +313,7 @@ public abstract class BlockDrawersExtended extends BlockDrawers
         //if (!SecurityManager.hasAccess(playerIn.getGameProfile(), tileDrawers))
         //    return;
 
-        int slot = getDrawerSlot(rayResult);
+        int slot = getDrawerSlot(state, rayResult);
         IDrawer drawer = tileDrawers.getDrawer(slot);
 
         ItemStack item;
@@ -340,46 +331,22 @@ public abstract class BlockDrawersExtended extends BlockDrawers
             if (!playerIn.getInventory().add(item)) {
                 dropItemStack(worldIn, pos.relative(side), playerIn, item);
                 worldIn.sendBlockUpdated(pos, state, state, 3);
-            }
-            else
+            } else
                 worldIn.playSound(null, pos.getX() + .5f, pos.getY() + .5f, pos.getZ() + .5f, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, .2f, ((worldIn.random.nextFloat() - worldIn.random.nextFloat()) * .7f + 1) * 2);
         }
     }
 
-    private void dropItemStack (Level world, BlockPos pos, Player player, @Nonnull ItemStack stack) {
+    private void dropItemStack(Level world, BlockPos pos, Player player, @Nonnull ItemStack stack) {
         ItemEntity entity = new ItemEntity(world, pos.getX() + .5f, pos.getY() + .3f, pos.getZ() + .5f, stack);
         Vec3 motion = entity.getDeltaMovement();
         entity.push(-motion.x, -motion.y, -motion.z);
         world.addFreshEntity(entity);
     }
 
-
-
     @Override
-    public void onRemove (BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
-        TileEntityDrawersMore tile = (TileEntityDrawersMore)getTileEntity(world, pos);
-
-        if (tile != null) {
-            /*for (int i = 0; i < tile.upgrades().getSlotCount(); i++) {
-                ItemStack stack = tile.upgrades().getUpgrade(i);
-                if (!stack.isEmpty()) {
-                    if (stack.getItem() instanceof ItemUpgradeCreative)
-                        continue;
-                    spawnAsEntity(world, pos, stack);
-                }
-            }*/
-
-            //if (!tile.getDrawerAttributes().isUnlimitedVending())
-            //    DrawerInventoryHelper.dropInventoryItems(world, pos, tile.getGroup());
-        }
-
-        super.onRemove(state, world, pos, newState, isMoving);
-    }
-
-    @Override
-    public List<ItemStack> getDrops (BlockState state, LootContext.Builder builder) {
+    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         List<ItemStack> items = new ArrayList<>();
-        items.add(getMainDrop(state, (TileEntityDrawersMore)builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY)));
+        items.add(getMainDrop(state, (TileEntityDrawersMore) builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY)));
         return items;
     }
 
@@ -422,16 +389,14 @@ public abstract class BlockDrawersExtended extends BlockDrawers
 
     @Override
     @SuppressWarnings("deprecation")
-    public int getSignal  (BlockState state, BlockGetter blockAccess, BlockPos pos, Direction side) {
-        if (!isSignalSource (state))
+    public int getSignal(BlockState state, BlockGetter blockAccess, BlockPos pos, Direction side) {
+        if (!isSignalSource(state))
             return 0;
 
-        TileEntityDrawersMore tile = (TileEntityDrawersMore)getTileEntity(blockAccess, pos);
+        TileEntityDrawersMore tile = getBlockEntity(blockAccess, pos, TileEntityDrawersMore.class);
         if (tile == null || !tile.isRedstone())
             return 0;
 
         return tile.getRedstoneLevel();
     }
-
-
 }
