@@ -1,0 +1,13 @@
+{
+  "parent": "morestoragedrawers:block/half_drawers",
+  "textures": {
+    "down": "morestoragedrawers:block/minecraft_white_concrete_side_h",
+    "east": "morestoragedrawers:block/minecraft_white_concrete_side_v",
+    "north": "morestoragedrawers:block/minecraft_white_concrete_front_2",
+    "particle": "morestoragedrawers:block/minecraft_white_concrete_front_2",
+    "south": "morestoragedrawers:block/minecraft_white_concrete_side",
+    "trim": "morestoragedrawers:block/minecraft_white_concrete_trim",
+    "up": "morestoragedrawers:block/minecraft_white_concrete_side_h",
+    "west": "morestoragedrawers:block/minecraft_white_concrete_side_v"
+  }
+}

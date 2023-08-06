@@ -1,13 +1,13 @@
 {
   "parent": "morestoragedrawers:block/full_drawers",
   "textures": {
-    "particle": "morestoragedrawers:blocks/biomesoplenty_cherry_front_1",
-    "east": "morestoragedrawers:blocks/biomesoplenty_cherry_side",
-    "west": "morestoragedrawers:blocks/biomesoplenty_cherry_side",
-    "north": "morestoragedrawers:blocks/biomesoplenty_cherry_front_1",
-    "up": "morestoragedrawers:blocks/biomesoplenty_cherry_side",
-    "down": "morestoragedrawers:blocks/biomesoplenty_cherry_side",
-    "south": "morestoragedrawers:blocks/biomesoplenty_cherry_side",
-    "trim": "morestoragedrawers:blocks/biomesoplenty_cherry_trim"
+    "particle": "morestoragedrawers:block/biomesoplenty_cherry_front_1",
+    "east": "morestoragedrawers:block/biomesoplenty_cherry_side",
+    "west": "morestoragedrawers:block/biomesoplenty_cherry_side",
+    "north": "morestoragedrawers:block/biomesoplenty_cherry_front_1",
+    "up": "morestoragedrawers:block/biomesoplenty_cherry_side",
+    "down": "morestoragedrawers:block/biomesoplenty_cherry_side",
+    "south": "morestoragedrawers:block/biomesoplenty_cherry_side",
+    "trim": "morestoragedrawers:block/biomesoplenty_cherry_trim"
   }
 }

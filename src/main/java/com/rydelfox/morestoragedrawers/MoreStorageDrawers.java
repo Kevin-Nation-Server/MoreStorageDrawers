@@ -44,7 +44,7 @@ public class MoreStorageDrawers {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onModQueueEvent);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onModConfigEvent);
         Tiles.BLOCK_ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-
+        ModCreativeModTabs.register(FMLJavaModLoadingContext.get().getModEventBus());
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }

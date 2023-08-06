@@ -1,0 +1,13 @@
+{
+  "parent": "morestoragedrawers:block/half_drawers",
+  "textures": {
+    "particle": "morestoragedrawers:block/minecraft_terracotta_front_4",
+    "east": "morestoragedrawers:block/minecraft_terracotta_side_v",
+    "west": "morestoragedrawers:block/minecraft_terracotta_side_v",
+    "north": "morestoragedrawers:block/minecraft_terracotta_front_4",
+    "up": "morestoragedrawers:block/minecraft_terracotta_side_h",
+    "down": "morestoragedrawers:block/minecraft_terracotta_side_h",
+    "south": "morestoragedrawers:block/minecraft_terracotta_side",
+    "trim": "morestoragedrawers:block/minecraft_terracotta_trim"
+  }
+}

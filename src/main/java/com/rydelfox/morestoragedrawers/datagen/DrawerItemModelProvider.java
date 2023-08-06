@@ -3,6 +3,7 @@ package com.rydelfox.morestoragedrawers.datagen;
 import com.rydelfox.morestoragedrawers.MoreStorageDrawers;
 import com.rydelfox.morestoragedrawers.block.DrawerMaterial;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -10,7 +11,7 @@ import static com.rydelfox.morestoragedrawers.PortUtil.*;
 
 public class DrawerItemModelProvider extends ItemModelProvider {
 
-    public DrawerItemModelProvider(DataGenerator generator, ExistingFileHelper helper) {
+    public DrawerItemModelProvider(PackOutput generator, ExistingFileHelper helper) {
         super(generator, MoreStorageDrawers.MOD_ID, helper);
     }
 

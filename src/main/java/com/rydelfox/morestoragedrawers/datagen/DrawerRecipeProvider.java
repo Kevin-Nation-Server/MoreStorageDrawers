@@ -3,7 +3,9 @@ package com.rydelfox.morestoragedrawers.datagen;
 import com.rydelfox.morestoragedrawers.MoreStorageDrawers;
 import com.rydelfox.morestoragedrawers.block.DrawerMaterial;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -17,12 +19,12 @@ import java.util.function.Consumer;
 
 public class DrawerRecipeProvider extends RecipeProvider {
 
-    public DrawerRecipeProvider(DataGenerator generatorIn) {
+    public DrawerRecipeProvider(PackOutput generatorIn) {
         super(generatorIn);
     }
 
     @Override
-    protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+    protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
         MoreStorageDrawers.logInfo("Generating Recipes");
         for(DrawerMaterial material : DrawerMaterial.values()) {
             if (material.getMod() != null && material.getMod().isLoaded()) {
@@ -48,7 +50,7 @@ public class DrawerRecipeProvider extends RecipeProvider {
         ConditionalRecipe.builder()
                 .addCondition( new ModLoadedCondition(material.getMod().getSerializedName()) )
                 .addRecipe(
-                        ShapedRecipeBuilder.shaped(material.getDrawer(1, false))
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, material.getDrawer(1, false))
                                 .pattern("///")
                                 .pattern(" x ")
                                 .pattern("///")
@@ -71,7 +73,7 @@ public class DrawerRecipeProvider extends RecipeProvider {
         ConditionalRecipe.builder()
                 .addCondition( new ModLoadedCondition(material.getMod().getSerializedName()) )
                 .addRecipe(
-                        ShapedRecipeBuilder.shaped(material.getDrawer(2, false),2)
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, material.getDrawer(2, false),2)
                                 .pattern("/x/")
                                 .pattern("///")
                                 .pattern("/x/")
@@ -94,7 +96,7 @@ public class DrawerRecipeProvider extends RecipeProvider {
         ConditionalRecipe.builder()
                 .addCondition( new ModLoadedCondition(material.getMod().getSerializedName()) )
                 .addRecipe(
-                        ShapedRecipeBuilder.shaped(material.getDrawer(4, false),4)
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, material.getDrawer(4, false),4)
                                 .pattern("x/x")
                                 .pattern("///")
                                 .pattern("x/x")
@@ -115,7 +117,7 @@ public class DrawerRecipeProvider extends RecipeProvider {
         ConditionalRecipe.builder()
                 .addCondition( new ModLoadedCondition(material.getMod().getSerializedName()) )
                 .addRecipe(
-                        ShapedRecipeBuilder.shaped(material.getDrawer(1, false))
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, material.getDrawer(1, false))
                                 .pattern("///")
                                 .pattern(" x ")
                                 .pattern("///")
@@ -136,7 +138,7 @@ public class DrawerRecipeProvider extends RecipeProvider {
         ConditionalRecipe.builder()
                 .addCondition( new ModLoadedCondition(material.getMod().getSerializedName()) )
                 .addRecipe(
-                        ShapedRecipeBuilder.shaped(material.getDrawer(2, false),2)
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, material.getDrawer(2, false),2)
                                 .pattern("/x/")
                                 .pattern("///")
                                 .pattern("/x/")
@@ -157,7 +159,7 @@ public class DrawerRecipeProvider extends RecipeProvider {
         ConditionalRecipe.builder()
                 .addCondition( new ModLoadedCondition(material.getMod().getSerializedName()) )
                 .addRecipe(
-                        ShapedRecipeBuilder.shaped(material.getDrawer(4, false),4)
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, material.getDrawer(4, false),4)
                                 .pattern("x/x")
                                 .pattern("///")
                                 .pattern("x/x")
@@ -179,7 +181,7 @@ public class DrawerRecipeProvider extends RecipeProvider {
         ConditionalRecipe.builder()
                 .addCondition( new ModLoadedCondition(material.getMod().getSerializedName()) )
                 .addRecipe(
-                        ShapedRecipeBuilder.shaped(material.getTrim(),4)
+                        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, material.getTrim(),4)
                                 .pattern("X/X")
                                 .pattern("/X/")
                                 .pattern("X/X")

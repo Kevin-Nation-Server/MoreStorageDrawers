@@ -1,0 +1,36 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "create"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "group": "morestoragedrawers",
+        "key": {
+          "/": {
+            "item": "create:brass_casing"
+          },
+          "x": {
+            "tag": "forge:chests/wooden"
+          }
+        },
+        "pattern": [
+          "x/x",
+          "///",
+          "x/x"
+        ],
+        "result": {
+          "count": 4,
+          "item": "morestoragedrawers:create_brass_casing_full_4"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

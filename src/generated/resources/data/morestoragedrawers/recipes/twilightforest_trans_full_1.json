@@ -10,6 +10,7 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "group": "morestoragedrawers",
         "key": {
           "/": [],
@@ -24,7 +25,8 @@
         ],
         "result": {
           "item": "morestoragedrawers:twilightforest_trans_full_1"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

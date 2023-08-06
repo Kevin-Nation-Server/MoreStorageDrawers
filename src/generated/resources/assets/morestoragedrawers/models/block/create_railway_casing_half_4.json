@@ -1,0 +1,13 @@
+{
+  "parent": "morestoragedrawers:block/half_drawers",
+  "textures": {
+    "down": "morestoragedrawers:block/create_railway_casing_side_h",
+    "east": "morestoragedrawers:block/create_railway_casing_side_v",
+    "north": "morestoragedrawers:block/create_railway_casing_front_4",
+    "particle": "morestoragedrawers:block/create_railway_casing_front_4",
+    "south": "morestoragedrawers:block/create_railway_casing_side",
+    "trim": "morestoragedrawers:block/create_railway_casing_trim",
+    "up": "morestoragedrawers:block/create_railway_casing_side_h",
+    "west": "morestoragedrawers:block/create_railway_casing_side_v"
+  }
+}

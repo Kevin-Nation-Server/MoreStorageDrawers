@@ -5,6 +5,7 @@ import com.rydelfox.morestoragedrawers.MoreStorageDrawers;
 import com.rydelfox.morestoragedrawers.block.BlockMoreDrawers;
 import com.rydelfox.morestoragedrawers.block.DrawerMaterial;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.KelpBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -22,7 +23,7 @@ import static com.rydelfox.morestoragedrawers.PortUtil.*;
 
 public class DrawerBlockStateProvider extends BlockStateProvider {
 
-    public DrawerBlockStateProvider(DataGenerator dataGeneratorIn, ExistingFileHelper helper) {
+    public DrawerBlockStateProvider(PackOutput dataGeneratorIn, ExistingFileHelper helper) {
         super(dataGeneratorIn, MoreStorageDrawers.MOD_ID, helper);
     }
 

@@ -1,7 +1,6 @@
 package com.rydelfox.morestoragedrawers.block;
 
 import com.jaquadro.minecraft.storagedrawers.block.BlockTrim;
-import com.rydelfox.morestoragedrawers.MoreCreative;
 import com.rydelfox.morestoragedrawers.MoreStorageDrawers;
 import com.rydelfox.morestoragedrawers.block.tile.TileEntityDrawersMore;
 import net.minecraft.resources.ResourceLocation;
@@ -10,7 +9,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -23,6 +22,17 @@ import java.util.Map;
 public enum DrawerMaterial implements StringRepresentable {
     DEFAULT(ID.DEFAULT, "default", "NO MATERIAL", 0, null),
 
+
+    MINECRAFT_BRICK(ID.MINECRAFT, "brick", "Brick", 100, "brick", "brick_slab"),
+    MINECRAFT_WHITE_CONCRETE(ID.MINECRAFT, "white_concrete", "White Concrete", 101, "white_concrete", "white_concrete"),
+    MINECRAFT_BLACK_CONCRETE(ID.MINECRAFT, "black_concrete", "Black Concrete", 102, "black_concrete", "black_concrete"),
+
+    CREATE_ANDESITE_CASING(ID.CREATE, "andesite_casing", "Andesite Casing", 200, "andesite_casing", "andesite_casing"),
+    CREATE_BRASS_CASING(ID.CREATE, "brass_casing", "Brass Casing", 201, "brass_casing", "brass_casing"),
+    CREATE_COPPER_CASING(ID.CREATE, "copper_casing", "Copper Casing", 202, "copper_casing", "copper_casing"),
+    CREATE_RAILWAY_CASING(ID.CREATE, "railway_casing", "Railway Casing", 203, "railway_casing", "railway_casing"),
+    MINECRAFT_TERRACOTTA(ID.MINECRAFT, "terracotta", "Terracotta", 102, "terracotta", "terracotta"),
+    //MINECRAFT_TERRACOTTA_RED(ID.MINECRAFT, "red_terracotta", "Red Terracotta", 1, "red_terracotta", "slab_terracotta_red"),
     ARSNOUVEAU_ARCHWOOD(ID.ARSNOUVEAU, "archwood", "Archwood", 1, "archwood_planks", "archwood_slab"),
     //ASTRALSORCERY_INFUSED(ID.ASTRALSORCERY, "infused", "Infused", 2, "infused_wood_planks", "infused_wood_slab", 6, 11, 0),
     BOTANIA_LIVINGWOOD(ID.BOTANIA, "livingwood", "Livingwood", 3, "livingwood_planks", "livingwood_planks_slab"),
@@ -33,7 +43,7 @@ public enum DrawerMaterial implements StringRepresentable {
     //EIDOLON_POLISHED(ID.EIDOLON, "polished", "Polished", 8, "polished_planks", "polished_planks_slab", 4, 5, 0),
     //HEXBLADES_DARK_POLISHED(ID.HEXBLADES, "dark_polished", "Dark Polished", 9, "dark_polished_planks", "dark_polished_planks_slab", 4, 5, 0),
     NATURESAURA_ANCIENT(ID.NATURESAURA, "ancient", "Ancient", 10, "ancient_planks", "ancient_slab"),
-    TWILIGHTFOREST_TOWER(ID.TWILIGHTFOREST, "tower", "Towerwood", 11, "tower_wood", null, 25, 20, 0),
+    TWILIGHTFOREST_TOWER(ID.TWILIGHTFOREST, "tower", "Towerwood", 11, "tower_wood", "tower_wood", 25, 20, 0),
     TWILIGHTFOREST_TWILIGHT(ID.TWILIGHTFOREST, "twilight", "Twilight Oak", 12, "twilight_oak_planks", "twilight_oak_slab"),
     TWILIGHTFOREST_CANOPY(ID.TWILIGHTFOREST, "canopy", "Canopy", 13, "canopy_planks", "canopy_slab"),
     TWILIGHTFOREST_MANGROVE(ID.TWILIGHTFOREST, "mangrove", "Mangrove", 14, "mangrove_planks", "mangrove_slab"),
@@ -108,7 +118,7 @@ public enum DrawerMaterial implements StringRepresentable {
     private final String namespace;
     private final String name;
     private final String englishName;
-    private final ResourceLocation resource;
+    public final ResourceLocation resource;
     private final ResourceLocation plankResource;
     private final ResourceLocation slabResource;
     private final int index;
@@ -300,7 +310,7 @@ public enum DrawerMaterial implements StringRepresentable {
         if (this.blockTrim != null)
             throw new IllegalStateException(this.getEnglishName() + " blocks have already been registered!");
         BlockBehaviour.Properties properties = BlockBehaviour.Properties
-            .of(Material.WOOD)
+            .copy(Blocks.OAK_WOOD)
             .strength(hardness, blastResistance)
             .lightLevel((p1) -> light)
             .isSuffocating((p1, p2, p3) -> false)
@@ -331,13 +341,13 @@ public enum DrawerMaterial implements StringRepresentable {
         if (this.blockTrim == null)
             throw new IllegalStateException("Blocks must be registered before registering items!");
 
-        this.itemTrim = new BlockItem(this.blockTrim, new Item.Properties().tab(MoreCreative.TAB));
-        this.itemFullOne = new BlockItem(this.blockFullOne, new Item.Properties().tab(MoreCreative.TAB));
-        this.itemFullTwo = new BlockItem(this.blockFullTwo, new Item.Properties().tab(MoreCreative.TAB));
-        this.itemFullFour = new BlockItem(this.blockFullFour, new Item.Properties().tab(MoreCreative.TAB));
-        this.itemHalfOne = new BlockItem(this.blockHalfOne, new Item.Properties().tab(MoreCreative.TAB));
-        this.itemHalfTwo = new BlockItem(this.blockHalfTwo, new Item.Properties().tab(MoreCreative.TAB));
-        this.itemHalfFour = new BlockItem(this.blockHalfFour, new Item.Properties().tab(MoreCreative.TAB));
+        this.itemTrim = new BlockItem(this.blockTrim, new Item.Properties());
+        this.itemFullOne = new BlockItem(this.blockFullOne, new Item.Properties());
+        this.itemFullTwo = new BlockItem(this.blockFullTwo, new Item.Properties());
+        this.itemFullFour = new BlockItem(this.blockFullFour, new Item.Properties());
+        this.itemHalfOne = new BlockItem(this.blockHalfOne, new Item.Properties());
+        this.itemHalfTwo = new BlockItem(this.blockHalfTwo, new Item.Properties());
+        this.itemHalfFour = new BlockItem(this.blockHalfFour, new Item.Properties());
 
         registry.register(namespace + "_" + name + "_trim", itemTrim);
         registry.register(namespace + "_" + name + "_full_1", itemFullOne);
@@ -376,6 +386,8 @@ public enum DrawerMaterial implements StringRepresentable {
 
     private static class ID {
         public static final String DEFAULT = "none";
+        public static final String MINECRAFT = "minecraft";
+        public static final String CREATE = "create";
         public static final String ARSNOUVEAU = "ars_nouveau";
         public static final String ASTRALSORCERY = "astralsorcery";
         public static final String BOTANIA = "botania";
