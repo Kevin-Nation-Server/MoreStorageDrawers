@@ -10,11 +10,10 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "group": "morestoragedrawers",
         "key": {
-          "/": {
-            "item": "biomesoplenty:cherry_planks"
-          },
+          "/": [],
           "x": {
             "tag": "forge:chests/wooden"
           }
@@ -27,7 +26,8 @@
         "result": {
           "count": 4,
           "item": "morestoragedrawers:biomesoplenty_cherry_full_4"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

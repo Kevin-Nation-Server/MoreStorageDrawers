@@ -1,13 +1,13 @@
 {
   "parent": "morestoragedrawers:block/half_drawers",
   "textures": {
-    "down": "morestoragedrawers:blocks/create_copper_casing_side_h",
-    "east": "morestoragedrawers:blocks/create_copper_casing_side_v",
-    "north": "morestoragedrawers:blocks/create_copper_casing_front_4",
-    "particle": "morestoragedrawers:blocks/create_copper_casing_front_4",
-    "south": "morestoragedrawers:blocks/create_copper_casing_side",
-    "trim": "morestoragedrawers:blocks/create_copper_casing_trim",
-    "up": "morestoragedrawers:blocks/create_copper_casing_side_h",
-    "west": "morestoragedrawers:blocks/create_copper_casing_side_v"
+    "down": "morestoragedrawers:block/create_copper_casing_side_h",
+    "east": "morestoragedrawers:block/create_copper_casing_side_v",
+    "north": "morestoragedrawers:block/create_copper_casing_front_4",
+    "particle": "morestoragedrawers:block/create_copper_casing_front_4",
+    "south": "morestoragedrawers:block/create_copper_casing_side",
+    "trim": "morestoragedrawers:block/create_copper_casing_trim",
+    "up": "morestoragedrawers:block/create_copper_casing_side_h",
+    "west": "morestoragedrawers:block/create_copper_casing_side_v"
   }
 }

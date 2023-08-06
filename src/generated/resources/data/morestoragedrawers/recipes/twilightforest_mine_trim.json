@@ -10,14 +10,13 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "group": "morestoragedrawers",
         "key": {
           "/": {
             "tag": "forge:rods/wooden"
           },
-          "X": {
-            "item": "twilightforest:mining_planks"
-          }
+          "X": []
         },
         "pattern": [
           "X/X",
@@ -27,7 +26,8 @@
         "result": {
           "count": 4,
           "item": "morestoragedrawers:twilightforest_mine_trim"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

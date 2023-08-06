@@ -1,4 +1,4 @@
-package com.rydelfox.morestoragedrawers.client.renderer;
+/*package com.rydelfox.morestoragedrawers.client.renderer;
 
 import com.jaquadro.minecraft.storagedrawers.inventory.ItemStackHelper;
 import com.mojang.blaze3d.vertex.*;
@@ -188,3 +188,4 @@ public class StorageRenderItem extends ItemRenderer {
     }
 
 }
+*/

@@ -15,6 +15,6 @@ public class MoreDrawerKeysUses {
     @Inject(method = "useOn", at = @At("HEAD"))
     protected void injectMoreBlocks(UseOnContext context, CallbackInfoReturnable info) {
         BlockEntity blockEntity = WorldUtils.getBlockEntity(context.getLevel(), context.getClickedPos(), BlockEntity.class);
-System.out.println("########################### MIXIN MIXIN MIXIN MIXIN MIXIN MIXIN MIXIN MIXIN MIXIN MIXIN MIXIN");
+//System.out.println("########################### MIXIN MIXIN MIXIN MIXIN MIXIN MIXIN MIXIN MIXIN MIXIN MIXIN MIXIN");
     }
 }

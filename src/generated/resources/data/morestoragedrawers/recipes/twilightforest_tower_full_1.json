@@ -10,11 +10,10 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "group": "morestoragedrawers",
         "key": {
-          "/": {
-            "item": "twilightforest:towerwood"
-          },
+          "/": [],
           "x": {
             "tag": "forge:chests/wooden"
           }
@@ -26,7 +25,8 @@
         ],
         "result": {
           "item": "morestoragedrawers:twilightforest_tower_full_1"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

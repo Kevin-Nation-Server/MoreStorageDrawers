@@ -10,11 +10,10 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "group": "morestoragedrawers",
         "key": {
-          "/": {
-            "item": "twilightforest:sorting_planks"
-          },
+          "/": [],
           "x": {
             "tag": "forge:chests/wooden"
           }
@@ -27,7 +26,8 @@
         "result": {
           "count": 2,
           "item": "morestoragedrawers:twilightforest_sort_full_2"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

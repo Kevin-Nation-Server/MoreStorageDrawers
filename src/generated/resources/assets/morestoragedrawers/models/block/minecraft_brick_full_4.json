@@ -1,13 +1,13 @@
 {
   "parent": "morestoragedrawers:block/full_drawers",
   "textures": {
-    "down": "morestoragedrawers:blocks/minecraft_brick_side",
-    "east": "morestoragedrawers:blocks/minecraft_brick_side",
-    "north": "morestoragedrawers:blocks/minecraft_brick_front_4",
-    "particle": "morestoragedrawers:blocks/minecraft_brick_front_4",
-    "south": "morestoragedrawers:blocks/minecraft_brick_side",
-    "trim": "morestoragedrawers:blocks/minecraft_brick_trim",
-    "up": "morestoragedrawers:blocks/minecraft_brick_side",
-    "west": "morestoragedrawers:blocks/minecraft_brick_side"
+    "down": "morestoragedrawers:block/minecraft_brick_side",
+    "east": "morestoragedrawers:block/minecraft_brick_side",
+    "north": "morestoragedrawers:block/minecraft_brick_front_4",
+    "particle": "morestoragedrawers:block/minecraft_brick_front_4",
+    "south": "morestoragedrawers:block/minecraft_brick_side",
+    "trim": "morestoragedrawers:block/minecraft_brick_trim",
+    "up": "morestoragedrawers:block/minecraft_brick_side",
+    "west": "morestoragedrawers:block/minecraft_brick_side"
   }
 }

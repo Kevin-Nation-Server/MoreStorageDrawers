@@ -10,11 +10,10 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "group": "morestoragedrawers",
         "key": {
-          "/": {
-            "item": "twilightforest:transformation_planks"
-          },
+          "/": [],
           "x": {
             "tag": "forge:chests/wooden"
           }
@@ -27,7 +26,8 @@
         "result": {
           "count": 4,
           "item": "morestoragedrawers:twilightforest_trans_full_4"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

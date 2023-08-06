@@ -2,11 +2,15 @@ package com.rydelfox.morestoragedrawers.datagen;
 
 import com.rydelfox.morestoragedrawers.block.DrawerMaterial;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+
+import java.util.Set;
 
 public class DrawerLootTableProvider extends BaseLootTables {
 
-    public DrawerLootTableProvider(DataGenerator dataGeneratorIn) {
+    public DrawerLootTableProvider(PackOutput dataGeneratorIn) {
         super(dataGeneratorIn);
     }
 

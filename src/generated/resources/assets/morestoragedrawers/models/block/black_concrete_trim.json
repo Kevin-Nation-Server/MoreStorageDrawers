@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "morestoragedrawers:blocks/minecraft_black_concrete_side"
+    "all": "morestoragedrawers:block/minecraft_black_concrete_side"
   }
 }

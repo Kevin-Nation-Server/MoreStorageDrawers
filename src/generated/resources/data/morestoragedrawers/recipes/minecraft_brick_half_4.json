@@ -10,6 +10,7 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "group": "morestoragedrawers",
         "key": {
           "/": {
@@ -27,7 +28,8 @@
         "result": {
           "count": 4,
           "item": "morestoragedrawers:minecraft_brick_full_4"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

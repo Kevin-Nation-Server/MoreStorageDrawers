@@ -1,7 +1,6 @@
 package com.rydelfox.morestoragedrawers.block;
 
 import com.jaquadro.minecraft.storagedrawers.block.BlockTrim;
-import com.rydelfox.morestoragedrawers.MoreCreative;
 import com.rydelfox.morestoragedrawers.MoreStorageDrawers;
 import com.rydelfox.morestoragedrawers.block.tile.TileEntityDrawersMore;
 import net.minecraft.resources.ResourceLocation;
@@ -10,7 +9,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -119,7 +118,7 @@ public enum DrawerMaterial implements StringRepresentable {
     private final String namespace;
     private final String name;
     private final String englishName;
-    private final ResourceLocation resource;
+    public final ResourceLocation resource;
     private final ResourceLocation plankResource;
     private final ResourceLocation slabResource;
     private final int index;
@@ -311,7 +310,7 @@ public enum DrawerMaterial implements StringRepresentable {
         if (this.blockTrim != null)
             throw new IllegalStateException(this.getEnglishName() + " blocks have already been registered!");
         BlockBehaviour.Properties properties = BlockBehaviour.Properties
-            .of(Material.WOOD)
+            .copy(Blocks.OAK_WOOD)
             .strength(hardness, blastResistance)
             .lightLevel((p1) -> light)
             .isSuffocating((p1, p2, p3) -> false)
@@ -342,13 +341,13 @@ public enum DrawerMaterial implements StringRepresentable {
         if (this.blockTrim == null)
             throw new IllegalStateException("Blocks must be registered before registering items!");
 
-        this.itemTrim = new BlockItem(this.blockTrim, new Item.Properties().tab(MoreCreative.TAB));
-        this.itemFullOne = new BlockItem(this.blockFullOne, new Item.Properties().tab(MoreCreative.TAB));
-        this.itemFullTwo = new BlockItem(this.blockFullTwo, new Item.Properties().tab(MoreCreative.TAB));
-        this.itemFullFour = new BlockItem(this.blockFullFour, new Item.Properties().tab(MoreCreative.TAB));
-        this.itemHalfOne = new BlockItem(this.blockHalfOne, new Item.Properties().tab(MoreCreative.TAB));
-        this.itemHalfTwo = new BlockItem(this.blockHalfTwo, new Item.Properties().tab(MoreCreative.TAB));
-        this.itemHalfFour = new BlockItem(this.blockHalfFour, new Item.Properties().tab(MoreCreative.TAB));
+        this.itemTrim = new BlockItem(this.blockTrim, new Item.Properties());
+        this.itemFullOne = new BlockItem(this.blockFullOne, new Item.Properties());
+        this.itemFullTwo = new BlockItem(this.blockFullTwo, new Item.Properties());
+        this.itemFullFour = new BlockItem(this.blockFullFour, new Item.Properties());
+        this.itemHalfOne = new BlockItem(this.blockHalfOne, new Item.Properties());
+        this.itemHalfTwo = new BlockItem(this.blockHalfTwo, new Item.Properties());
+        this.itemHalfFour = new BlockItem(this.blockHalfFour, new Item.Properties());
 
         registry.register(namespace + "_" + name + "_trim", itemTrim);
         registry.register(namespace + "_" + name + "_full_1", itemFullOne);
