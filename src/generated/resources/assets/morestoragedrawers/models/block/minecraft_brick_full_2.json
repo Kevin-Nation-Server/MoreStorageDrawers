@@ -1,0 +1,13 @@
+{
+  "parent": "morestoragedrawers:block/full_drawers",
+  "textures": {
+    "down": "morestoragedrawers:block/minecraft_brick_side",
+    "east": "morestoragedrawers:block/minecraft_brick_side",
+    "north": "morestoragedrawers:block/minecraft_brick_front_2",
+    "particle": "morestoragedrawers:block/minecraft_brick_front_2",
+    "south": "morestoragedrawers:block/minecraft_brick_side",
+    "trim": "morestoragedrawers:block/minecraft_brick_trim",
+    "up": "morestoragedrawers:block/minecraft_brick_side",
+    "west": "morestoragedrawers:block/minecraft_brick_side"
+  }
+}

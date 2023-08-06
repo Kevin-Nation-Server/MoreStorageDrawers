@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "morestoragedrawers:blocks/twilightforest_tower_side"
+    "all": "morestoragedrawers:block/twilightforest_tower_side"
   }
 }

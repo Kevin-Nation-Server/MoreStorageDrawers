@@ -10,6 +10,7 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "group": "morestoragedrawers",
         "key": {
           "/": {
@@ -25,7 +26,8 @@
         "result": {
           "count": 4,
           "item": "morestoragedrawers:twilightforest_mine_trim"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

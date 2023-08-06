@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "morestoragedrawers:blocks/botania_shimmerwood_side"
+    "all": "morestoragedrawers:block/botania_shimmerwood_side"
   }
 }

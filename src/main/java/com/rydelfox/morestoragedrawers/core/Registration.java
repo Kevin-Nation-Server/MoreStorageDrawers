@@ -1,5 +1,6 @@
 package com.rydelfox.morestoragedrawers.core;
 
+import com.jaquadro.minecraft.storagedrawers.core.ModBlocks;
 import com.rydelfox.morestoragedrawers.block.BlockDrawersExtended;
 import com.rydelfox.morestoragedrawers.block.DrawerMaterial;
 import com.rydelfox.morestoragedrawers.block.tile.Tiles;
@@ -9,7 +10,13 @@ import com.rydelfox.morestoragedrawers.datagen.DrawerLootTableProvider;
 import com.rydelfox.morestoragedrawers.datagen.DrawerRecipeProvider;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -23,6 +30,7 @@ import net.minecraftforge.registries.RegisterEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import static com.rydelfox.morestoragedrawers.MoreStorageDrawers.*;
 
@@ -33,7 +41,7 @@ public class Registration {
         event.register(ForgeRegistries.Keys.BLOCKS, (helper) -> {
             logInfo("MoreStorageDrawers: Registering Blocks");
             for (DrawerMaterial material : DrawerMaterial.values()) {
-                if (material.getMod().isLoaded())
+                if (material.getMod() != null && material.getMod().isLoaded())
                     material.registerBlocks(event.getForgeRegistry());
             }
             Tiles.initializeTiles();
@@ -45,7 +53,7 @@ public class Registration {
         event.register(ForgeRegistries.Keys.ITEMS, (helper) -> {
             logInfo("MoreStorageDrawers: Registering Items");
             for (DrawerMaterial material : DrawerMaterial.values()) {
-                if (material.getMod().isLoaded())
+                if (material.getMod() != null && material.getMod().isLoaded())
                     material.registerItems(event.getForgeRegistry());
             }
         });
@@ -55,15 +63,18 @@ public class Registration {
     public static void onGatherData(GatherDataEvent event) {
         logInfo("MoreStorageDrawers: Running Datagen");
         DataGenerator generator = event.getGenerator();
+        PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper helper = event.getExistingFileHelper();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+
         if (event.includeServer()) {
-            generator.addProvider(true, new DrawerRecipeProvider(generator));
-            generator.addProvider(true, new DrawerLootTableProvider(generator));
+            generator.addProvider(true, new DrawerRecipeProvider(packOutput));
+            generator.addProvider(true, new DrawerLootTableProvider(packOutput));
             //generator.addProvider(new DrawerTagsProvider(generator,helper));
         }
         if (event.includeClient()) {
-            generator.addProvider(true, new DrawerBlockStateProvider(generator, helper));
-            generator.addProvider(true, new DrawerItemModelProvider(generator, helper));
+            generator.addProvider(true, new DrawerBlockStateProvider(packOutput, helper));
+            generator.addProvider(true, new DrawerItemModelProvider(packOutput, helper));
         }
         try {
             generator.run();
@@ -72,6 +83,7 @@ public class Registration {
             e.printStackTrace();
         }
     }
+
 
     @OnlyIn(Dist.CLIENT)
     public static void bindRenderTypes() {

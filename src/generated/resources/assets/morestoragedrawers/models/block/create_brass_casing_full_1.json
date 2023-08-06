@@ -1,0 +1,13 @@
+{
+  "parent": "morestoragedrawers:block/full_drawers",
+  "textures": {
+    "down": "morestoragedrawers:block/create_brass_casing_side",
+    "east": "morestoragedrawers:block/create_brass_casing_side",
+    "north": "morestoragedrawers:block/create_brass_casing_front_1",
+    "particle": "morestoragedrawers:block/create_brass_casing_front_1",
+    "south": "morestoragedrawers:block/create_brass_casing_side",
+    "trim": "morestoragedrawers:block/create_brass_casing_trim",
+    "up": "morestoragedrawers:block/create_brass_casing_side",
+    "west": "morestoragedrawers:block/create_brass_casing_side"
+  }
+}
