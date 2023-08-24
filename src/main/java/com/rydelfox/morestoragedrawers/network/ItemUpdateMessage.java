@@ -1,6 +1,10 @@
 package com.rydelfox.morestoragedrawers.network;
 
+import com.jaquadro.minecraft.storagedrawers.StorageDrawers;
+import com.jaquadro.minecraft.storagedrawers.network.CountUpdateMessage;
 import com.rydelfox.morestoragedrawers.block.tile.TileEntityDrawersMore;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.FriendlyByteBuf;
@@ -16,16 +20,20 @@ import java.util.function.Supplier;
 
 public class ItemUpdateMessage {
 
-    private BlockPos pos;
+    private int x;
+    private int y;
+    private int z;
     private int slot;
-    private ItemStack item;
+    private int count;
 
-    private boolean failed;
+    private final boolean failed;
 
-    public ItemUpdateMessage (BlockPos pos, int slot, ItemStack item) {
-        this.pos = pos;
+    public ItemUpdateMessage (BlockPos pos, int slot, int count) {
+        this.x = pos.getX();
+        this.y = pos.getY();
+        this.z = pos.getZ();
         this.slot = slot;
-        this.item = item;
+        this.count = count;
         this.failed = false;
     }
 
@@ -33,14 +41,30 @@ public class ItemUpdateMessage {
         this.failed = failed;
     }
 
-    public static ItemUpdateMessage decode (FriendlyByteBuf buf) {
-        return new ItemUpdateMessage(buf.readBlockPos(), buf.readByte(), buf.readItem());
+    public static ItemUpdateMessage decode (ByteBuf buf) {
+        //return new ItemUpdateMessage(buf.readBlockPos(), buf.readByte(), buf.readItem());
+
+        try {
+            int x = buf.readInt();
+            int y = buf.readShort();
+            int z = buf.readInt();
+            int slot = buf.readByte();
+            int count = buf.readInt();
+            return new ItemUpdateMessage(new BlockPos(x, y, z), slot, count);
+        }
+        catch (IndexOutOfBoundsException e) {
+            StorageDrawers.log.error("CountUpdateMessage: Unexpected end of packet.\nMessage: " + ByteBufUtil.hexDump(buf, 0, buf.writerIndex()), e);
+            return new ItemUpdateMessage(true);
+        }
+
     }
 
-    public static void encode (ItemUpdateMessage object, FriendlyByteBuf buf) {
-        buf.writeBlockPos(object.pos);
-        buf.writeByte(object.slot);
-        buf.writeItemStack(object.item, false);
+    public static void encode (ItemUpdateMessage msg, ByteBuf buf) {
+        buf.writeInt(msg.x);
+        buf.writeShort(msg.y);
+        buf.writeInt(msg.z);
+        buf.writeByte(msg.slot);
+        buf.writeInt(msg.count);
     }
 
     public static void handle(ItemUpdateMessage msg, Supplier<NetworkEvent.Context> ctx) {
@@ -52,12 +76,13 @@ public class ItemUpdateMessage {
         if (!msg.failed) {
             Level world = Minecraft.getInstance().level;
             if (world != null) {
-                BlockPos pos = msg.pos;
+                BlockPos pos = new BlockPos(msg.x, msg.y, msg.z);
                 BlockEntity tileEntity = world.getBlockEntity(pos);
                 if (tileEntity instanceof TileEntityDrawersMore) {
-                    ((TileEntityDrawersMore) tileEntity).clientUpdateItem(msg.slot, msg.item);
+                    ((TileEntityDrawersMore) tileEntity).clientUpdateItem(msg.slot, msg.count);
                 }
             }
         }
+        ctx.setPacketHandled(true);
     }
 }

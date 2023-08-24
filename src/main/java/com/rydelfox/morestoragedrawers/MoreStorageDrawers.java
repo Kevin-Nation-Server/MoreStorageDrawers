@@ -8,6 +8,7 @@ import com.rydelfox.morestoragedrawers.block.EnumMod;
 import com.rydelfox.morestoragedrawers.block.tile.Tiles;
 import com.rydelfox.morestoragedrawers.core.Registration;
 import com.rydelfox.morestoragedrawers.network.MoreStorageDrawersPacketHandler;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -91,5 +92,9 @@ public class MoreStorageDrawers {
                 logInfo("MoreStorageDrawers: " + mod.getSerializedName() + " mod loaded");
             }
         }
+    }
+
+    public static ResourceLocation rl(String path) {
+        return new ResourceLocation(MOD_ID, path);
     }
 }

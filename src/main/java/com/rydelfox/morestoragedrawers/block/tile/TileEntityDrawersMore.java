@@ -111,29 +111,33 @@ public class TileEntityDrawersMore extends BlockEntityDrawers {
         }
     }
 
-    protected void syncClientItem(int slot, ItemStack item) {
+    protected void syncClientItem(int slot, int count) {
         if (getLevel() != null && getLevel().isClientSide)
             return;
 
         PacketDistributor.TargetPoint point = new PacketDistributor.TargetPoint(
                 getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ(), 500, getLevel().dimension());
-        MoreStorageDrawersPacketHandler.INSTANCE.send(PacketDistributor.NEAR.with(() -> point), new ItemUpdateMessage(getBlockPos(), slot, item));
+        MoreStorageDrawersPacketHandler.INSTANCE.send(PacketDistributor.NEAR.with(() -> point), new ItemUpdateMessage(getBlockPos(), slot, count));
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void clientUpdateItem (final int slot, final ItemStack item) {
-        if(!getLevel().isClientSide)
+    public void clientUpdateItem (final int slot, final int count) {
+        if(getLevel() == null || !getLevel().isClientSide)
             return;
 
-        Minecraft.getInstance().tell(() -> TileEntityDrawersMore.this.clientUpdateItemAsync(slot, item));
+        Minecraft.getInstance().tell(() -> TileEntityDrawersMore.this.clientUpdateItemAsync(slot, count));
     }
 
     @OnlyIn(Dist.CLIENT)
-    private void clientUpdateItemAsync (int slot, ItemStack item) {
+    private void clientUpdateItemAsync (int slot, int count) {
         IDrawer drawer = getGroup().getDrawer(slot);
-        if (drawer.isEnabled() && drawer.getStoredItemPrototype() != item) {
-            drawer.setStoredItem(item);
+        if (drawer.isEnabled() && drawer.getStoredItemCount() != count) {
+            drawer.setStoredItemCount(count);
         }
+    }
+
+    public boolean dataPacketRequiresRenderUpdate () {
+        return true;
     }
 
     @Override
@@ -187,10 +191,9 @@ public class TileEntityDrawersMore extends BlockEntityDrawers {
             DrawerPopulatedEvent event = new DrawerPopulatedEvent(this);
             MinecraftForge.EVENT_BUS.post(event);
 
-            if (getLevel() != null && !getLevel().isClientSide && !getStoredItemPrototype().isEmpty()) {
-                syncClientItem(slot, getStoredItemPrototype());
-                syncClientCount(slot, getStoredItemCount());
+            if (getLevel() != null && !getLevel().isClientSide) {
                 setChanged();
+                markBlockForUpdate();
             }
             // At this point, client claims to contain air
         }
@@ -203,7 +206,7 @@ public class TileEntityDrawersMore extends BlockEntityDrawers {
             }
         }
 
-        @Override
+     /*   @Override
         protected IDrawer setStoredItem(@Nonnull ItemStack itemPrototype, boolean notify) {
             if(ItemStackHelper.isStackEncoded(itemPrototype)) {
                 itemPrototype = ItemStackHelper.decodeItemStackPrototype(itemPrototype);
@@ -218,14 +221,14 @@ public class TileEntityDrawersMore extends BlockEntityDrawers {
             setStoredItemRaw(itemPrototype);
             forceUpdate();
             return this;
-        }
+        }*/
 
         @Override
         public void setStoredItemCount (int amount) {
             setStoredItemCount(amount, true);
         }
 
-        @Override
+       /* @Override
         protected void setStoredItemCount (int amount, boolean notify) {
             if (getStoredItemPrototype().isEmpty() || getStoredItemCount() == amount)
                 return;
@@ -235,15 +238,15 @@ public class TileEntityDrawersMore extends BlockEntityDrawers {
 
             super.setStoredItemCount(amount, notify);
             forceUpdate();
-        }
+        }*/
 
-        protected void forceUpdate() {
+        /*protected void forceUpdate() {
             putItemsIntoSlot(slot, ItemStack.EMPTY, 0);
             if(!getLevel().isClientSide) {
                 syncClientItem(slot, getStoredItemPrototype());
                 syncClientCount(slot, getStoredItemCount());
             }
-        }
+        }*/
     }
 
 }
