@@ -13,7 +13,9 @@
         "category": "misc",
         "group": "morestoragedrawers",
         "key": {
-          "/": [],
+          "/": {
+            "item": "twilightforest:towerwood"
+          },
           "x": {
             "tag": "forge:chests/wooden"
           }

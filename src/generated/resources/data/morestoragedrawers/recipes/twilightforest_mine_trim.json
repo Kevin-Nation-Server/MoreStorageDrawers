@@ -16,7 +16,9 @@
           "/": {
             "tag": "forge:rods/wooden"
           },
-          "X": []
+          "X": {
+            "item": "twilightforest:mining_planks"
+          }
         },
         "pattern": [
           "X/X",
