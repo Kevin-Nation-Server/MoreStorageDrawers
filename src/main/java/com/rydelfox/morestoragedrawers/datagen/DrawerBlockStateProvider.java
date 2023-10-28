@@ -33,41 +33,41 @@ public class DrawerBlockStateProvider extends BlockStateProvider {
 
         for (DrawerMaterial material : DrawerMaterial.values()) {
             if (material.getMod() != null && material.getMod().isLoaded()) {
-                BlockModelBuilder trimBlock = models().cubeAll("block/" + material.getName() + "_trim", modLoc("blocks/" + material.prefix() + "_side"));
+                BlockModelBuilder trimBlock = models().cubeAll("block/" + material.getName() + "_trim", modLoc("block/" + material.prefix() + "_side"));
                 simpleBlock(material.getTrim(), trimBlock);
                 simpleBlockItem(material.getTrim(), trimBlock);
 
                 horizontalDrawer(material.getDrawer(1, false),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_side"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_front_1"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_trim"), false);
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_side"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_front_1"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_trim"), false);
                 horizontalDrawer(material.getDrawer(2, false),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_side"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_front_2"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_trim"), false);
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_side"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_front_2"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_trim"), false);
                 horizontalDrawer(material.getDrawer(4, false),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_side"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_front_4"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_trim"), false);
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_side"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_front_4"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_trim"), false);
 
                 horizontalDrawer(material.getDrawer(1, true),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_side_v"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_front_1"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_side_h"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_side"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_trim"), true);
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_side_v"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_front_1"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_side_h"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_side"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_trim"), true);
                 horizontalDrawer(material.getDrawer(2, true),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_side_v"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_front_2"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_side_h"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_side"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_trim"), true);
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_side_v"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_front_2"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_side_h"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_side"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_trim"), true);
                 horizontalDrawer(material.getDrawer(4, true),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_side_v"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_front_4"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_side_h"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_side"),
-                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "blocks/" + material.prefix() + "_trim"), true);
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_side_v"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_front_4"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_side_h"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_side"),
+                        new ResourceLocation(MoreStorageDrawers.MOD_ID, "block/" + material.prefix() + "_trim"), true);
 
             }
         }

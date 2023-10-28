@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "morestoragedrawers:block/byg_fir_side"
+    "all": "morestoragedrawers:block/biomesoplenty_fir_side"
   }
 }

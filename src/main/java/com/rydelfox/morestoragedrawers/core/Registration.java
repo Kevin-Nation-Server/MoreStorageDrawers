@@ -69,7 +69,7 @@ public class Registration {
 
         if (event.includeServer()) {
             generator.addProvider(true, new DrawerRecipeProvider(packOutput));
-            generator.addProvider(true, new DrawerLootTableProvider(packOutput));
+            //generator.addProvider(true, new DrawerLootTableProvider(packOutput));
             //generator.addProvider(new DrawerTagsProvider(generator,helper));
         }
         if (event.includeClient()) {

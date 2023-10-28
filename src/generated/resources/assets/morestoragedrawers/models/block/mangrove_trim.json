@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "morestoragedrawers:block/byg_mangrove_side"
+    "all": "morestoragedrawers:block/twilightforest_mangrove_side"
   }
 }

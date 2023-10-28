@@ -97,11 +97,11 @@ public class MoreDrawerModel {
             for (DrawerMaterial material : DrawerMaterial.values()) {
                 MoreStorageDrawers.logInfo("x1155 MoreStorageDrawers: DrawerMaterial.values() ");
                 fullDrawers1.add(material.getDrawer(1, false));
-                fullDrawers1.add(material.getDrawer(1, true));
+                halfDrawers1.add(material.getDrawer(1, true));
                 fullDrawers2.add(material.getDrawer(2, false));
-                fullDrawers2.add(material.getDrawer(2, true));
+                halfDrawers2.add(material.getDrawer(2, true));
                 fullDrawers4.add(material.getDrawer(4, false));
-                fullDrawers4.add(material.getDrawer(4, true));
+                halfDrawers4.add(material.getDrawer(4, true));
             }
 
             MoreStorageDrawers.logInfo("x1155 MoreStorageDrawers: Populating Geometry");
@@ -203,8 +203,7 @@ public class MoreDrawerModel {
             MoreStorageDrawers.logInfo("MoreStorageDrawers: Registering Models");
             for (int i = 0; i < 4; i++) {
                 Direction dir = Direction.from2DDataValue(i);
-                BlockModelRotation rot = BlockModelRotation.by(0, (int) dir.toYRot() + 180);
-                Function<Material, TextureAtlasSprite> texGet = Material::sprite;
+                BlockModelRotation rot = BlockModelRotation.by(0, (int)dir.toYRot() + 180);
 
                 lockOverlaysFull.put(dir, event.getModels().get(new ModelResourceLocation(StorageDrawers.rl("meta_locked"), getVariant(dir, false))));
                 lockOverlaysHalf.put(dir, event.getModels().get(new ModelResourceLocation(StorageDrawers.rl("meta_locked"), getVariant(dir, true))));
@@ -219,7 +218,6 @@ public class MoreDrawerModel {
                 indicator4Full.put(dir, event.getModels().get(new ModelResourceLocation(StorageDrawers.rl("meta_indicator"), getVariant(dir, false, 4))));
                 indicator4Half.put(dir, event.getModels().get(new ModelResourceLocation(StorageDrawers.rl("meta_indicator"), getVariant(dir, true, 4))));
                 indicatorComp.put(dir, event.getModels().get(new ModelResourceLocation(StorageDrawers.rl("meta_comp_indicator"), getVariant(dir, false))));
-
             }
 
             for (DrawerMaterial material : DrawerMaterial.values()) {
