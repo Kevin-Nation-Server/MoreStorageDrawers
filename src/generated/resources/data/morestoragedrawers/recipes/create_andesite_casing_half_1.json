@@ -23,10 +23,10 @@
         "pattern": [
           "///",
           " x ",
-          "///"
+          "   "
         ],
         "result": {
-          "item": "morestoragedrawers:create_andesite_casing_full_1"
+          "item": "morestoragedrawers:create_andesite_casing_half_1"
         },
         "show_notification": true
       }

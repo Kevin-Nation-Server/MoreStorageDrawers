@@ -1,13 +1,11 @@
 package com.rydelfox.morestoragedrawers.core;
 
 import com.jaquadro.minecraft.storagedrawers.core.ModBlocks;
+import com.rydelfox.morestoragedrawers.MoreStorageDrawers;
 import com.rydelfox.morestoragedrawers.block.BlockDrawersExtended;
 import com.rydelfox.morestoragedrawers.block.DrawerMaterial;
 import com.rydelfox.morestoragedrawers.block.tile.Tiles;
-import com.rydelfox.morestoragedrawers.datagen.DrawerBlockStateProvider;
-import com.rydelfox.morestoragedrawers.datagen.DrawerItemModelProvider;
-import com.rydelfox.morestoragedrawers.datagen.DrawerLootTableProvider;
-import com.rydelfox.morestoragedrawers.datagen.DrawerRecipeProvider;
+import com.rydelfox.morestoragedrawers.datagen.*;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.HolderLookup;
@@ -64,18 +62,23 @@ public class Registration {
         logInfo("MoreStorageDrawers: Running Datagen");
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
-        ExistingFileHelper helper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        ExistingFileHelper helper = event.getExistingFileHelper();
 
         if (event.includeServer()) {
             generator.addProvider(true, new DrawerRecipeProvider(packOutput));
+            generator.addProvider(true, new ModBlockTagGenerator(packOutput, lookupProvider, helper));
             //generator.addProvider(true, new DrawerLootTableProvider(packOutput));
             //generator.addProvider(new DrawerTagsProvider(generator,helper));
         }
+
         if (event.includeClient()) {
             generator.addProvider(true, new DrawerBlockStateProvider(packOutput, helper));
             generator.addProvider(true, new DrawerItemModelProvider(packOutput, helper));
+            generator.addProvider(true, new DrawerLanguageProvider(packOutput, MoreStorageDrawers.MOD_ID, "en_us" ));
         }
+
+
         try {
             generator.run();
         } catch (IOException e) {

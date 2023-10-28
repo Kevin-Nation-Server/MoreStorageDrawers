@@ -22,12 +22,12 @@
         },
         "pattern": [
           "x/x",
-          "///",
-          "x/x"
+          "x/x",
+          "   "
         ],
         "result": {
           "count": 4,
-          "item": "morestoragedrawers:minecraft_blue_concrete_full_4"
+          "item": "morestoragedrawers:minecraft_blue_concrete_half_4"
         },
         "show_notification": true
       }

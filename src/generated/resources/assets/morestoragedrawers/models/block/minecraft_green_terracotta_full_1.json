@@ -1,0 +1,13 @@
+{
+  "parent": "morestoragedrawers:block/full_drawers",
+  "textures": {
+    "down": "morestoragedrawers:block/minecraft_green_terracotta_side",
+    "east": "morestoragedrawers:block/minecraft_green_terracotta_side",
+    "north": "morestoragedrawers:block/minecraft_green_terracotta_front_1",
+    "particle": "morestoragedrawers:block/minecraft_green_terracotta_front_1",
+    "south": "morestoragedrawers:block/minecraft_green_terracotta_side",
+    "trim": "morestoragedrawers:block/minecraft_green_terracotta_trim",
+    "up": "morestoragedrawers:block/minecraft_green_terracotta_side",
+    "west": "morestoragedrawers:block/minecraft_green_terracotta_side"
+  }
+}

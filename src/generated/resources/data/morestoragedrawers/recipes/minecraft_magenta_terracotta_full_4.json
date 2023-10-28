@@ -1,0 +1,36 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "minecraft"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "group": "morestoragedrawers",
+        "key": {
+          "/": {
+            "item": "minecraft:magenta_terracotta"
+          },
+          "x": {
+            "tag": "forge:chests/wooden"
+          }
+        },
+        "pattern": [
+          "x/x",
+          "///",
+          "x/x"
+        ],
+        "result": {
+          "count": 4,
+          "item": "morestoragedrawers:minecraft_magenta_terracotta_full_4"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

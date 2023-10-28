@@ -23,10 +23,10 @@
         "pattern": [
           "///",
           " x ",
-          "///"
+          "   "
         ],
         "result": {
-          "item": "morestoragedrawers:minecraft_green_concrete_full_1"
+          "item": "morestoragedrawers:minecraft_green_concrete_half_1"
         },
         "show_notification": true
       }

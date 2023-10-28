@@ -22,12 +22,12 @@
         },
         "pattern": [
           "x/x",
-          "///",
-          "x/x"
+          "x/x",
+          "   "
         ],
         "result": {
           "count": 4,
-          "item": "morestoragedrawers:create_brass_casing_full_4"
+          "item": "morestoragedrawers:create_brass_casing_half_4"
         },
         "show_notification": true
       }

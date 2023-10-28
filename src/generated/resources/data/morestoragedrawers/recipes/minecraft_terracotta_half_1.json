@@ -23,10 +23,10 @@
         "pattern": [
           "///",
           " x ",
-          "///"
+          "   "
         ],
         "result": {
-          "item": "morestoragedrawers:minecraft_terracotta_full_1"
+          "item": "morestoragedrawers:minecraft_terracotta_half_1"
         },
         "show_notification": true
       }
