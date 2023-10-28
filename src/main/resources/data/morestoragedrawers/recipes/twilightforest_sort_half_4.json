@@ -1,0 +1,36 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "twilightforest"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "group": "morestoragedrawers",
+        "key": {
+          "/": {
+			"item": "twilightforest:sorting_planks"
+		  },
+          "x": {
+            "tag": "forge:chests/wooden"
+          }
+        },
+        "pattern": [
+          "x/x",
+          "///",
+          "x/x"
+        ],
+        "result": {
+          "count": 4,
+          "item": "morestoragedrawers:twilightforest_sort_full_4"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}
