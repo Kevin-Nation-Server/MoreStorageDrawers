@@ -1,13 +1,10 @@
 package com.rydelfox.morestoragedrawers.network;
 
 import com.jaquadro.minecraft.storagedrawers.StorageDrawers;
-import com.jaquadro.minecraft.storagedrawers.network.CountUpdateMessage;
-import com.rydelfox.morestoragedrawers.block.tile.TileEntityDrawersMore;
+import com.rydelfox.morestoragedrawers.block.tile.BlockEntityDrawersMore;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -78,8 +75,8 @@ public class ItemUpdateMessage {
             if (world != null) {
                 BlockPos pos = new BlockPos(msg.x, msg.y, msg.z);
                 BlockEntity tileEntity = world.getBlockEntity(pos);
-                if (tileEntity instanceof TileEntityDrawersMore) {
-                    ((TileEntityDrawersMore) tileEntity).clientUpdateItem(msg.slot, msg.count);
+                if (tileEntity instanceof BlockEntityDrawersMore) {
+                    ((BlockEntityDrawersMore) tileEntity).clientUpdateItem(msg.slot, msg.count);
                 }
             }
         }

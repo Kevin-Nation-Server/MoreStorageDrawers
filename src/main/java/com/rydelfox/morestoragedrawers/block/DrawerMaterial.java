@@ -2,7 +2,7 @@ package com.rydelfox.morestoragedrawers.block;
 
 import com.jaquadro.minecraft.storagedrawers.block.BlockTrim;
 import com.rydelfox.morestoragedrawers.MoreStorageDrawers;
-import com.rydelfox.morestoragedrawers.block.tile.TileEntityDrawersMore;
+import com.rydelfox.morestoragedrawers.block.tile.BlockEntityDrawersMore;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.BlockItem;
@@ -184,12 +184,12 @@ public enum DrawerMaterial implements StringRepresentable {
     private Item itemHalfTwo = null;
     private Item itemHalfFour = null;
 
-    private TileEntityDrawersMore tileFullOne = null;
-    private TileEntityDrawersMore tileFullTwo = null;
-    private TileEntityDrawersMore tileFullFour = null;
-    private TileEntityDrawersMore tileHalfOne = null;
-    private TileEntityDrawersMore tileHalfTwo = null;
-    private TileEntityDrawersMore tileHalfFour = null;
+    private BlockEntityDrawersMore tileFullOne = null;
+    private BlockEntityDrawersMore tileFullTwo = null;
+    private BlockEntityDrawersMore tileFullFour = null;
+    private BlockEntityDrawersMore tileHalfOne = null;
+    private BlockEntityDrawersMore tileHalfTwo = null;
+    private BlockEntityDrawersMore tileHalfFour = null;
 
     DrawerMaterial(String minableWith, String namespace, String name, String englishName, int index, String blockId) {
         this(minableWith, namespace, name, englishName, index, blockId, null);

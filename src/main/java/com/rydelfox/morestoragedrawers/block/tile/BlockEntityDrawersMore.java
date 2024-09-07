@@ -6,12 +6,10 @@ import com.jaquadro.minecraft.storagedrawers.api.storage.IDrawerAttributes;
 import com.jaquadro.minecraft.storagedrawers.api.storage.IDrawerGroup;
 import com.jaquadro.minecraft.storagedrawers.block.tile.BlockEntityDrawers;
 import com.jaquadro.minecraft.storagedrawers.block.tile.tiledata.StandardDrawerGroup;
-import com.jaquadro.minecraft.storagedrawers.inventory.ItemStackHelper;
 import com.rydelfox.morestoragedrawers.network.ItemUpdateMessage;
 import com.rydelfox.morestoragedrawers.network.MoreStorageDrawersPacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,15 +25,15 @@ import net.minecraftforge.network.PacketDistributor;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileEntityDrawersMore extends BlockEntityDrawers {
+public class BlockEntityDrawersMore extends BlockEntityDrawers {
 
     static Capability<IDrawerAttributes> DRAWER_ATTRIBUTES_CAPABILITY = CapabilityManager.get(new CapabilityToken<>(){});
 
-    public TileEntityDrawersMore (BlockEntityType<?> tileEntityType, BlockPos pos, BlockState state) {
+    public BlockEntityDrawersMore(BlockEntityType<?> tileEntityType, BlockPos pos, BlockState state) {
         super(tileEntityType, pos, state);
     }
 
-    public static class Slot1 extends TileEntityDrawersMore {
+    public static class Slot1 extends BlockEntityDrawersMore {
         private GroupData groupData = new GroupData(1);
 
         public Slot1 (BlockPos pos, BlockState state) {
@@ -56,7 +54,7 @@ public class TileEntityDrawersMore extends BlockEntityDrawers {
         }
     }
 
-    public static class Slot2 extends TileEntityDrawersMore {
+    public static class Slot2 extends BlockEntityDrawersMore {
         private GroupData groupData = new GroupData(2);
 
         public Slot2 (BlockPos pos, BlockState state) {
@@ -77,7 +75,7 @@ public class TileEntityDrawersMore extends BlockEntityDrawers {
         }
     }
 
-    public static class Slot4 extends TileEntityDrawersMore {
+    public static class Slot4 extends BlockEntityDrawersMore {
         private GroupData groupData = new GroupData(4);
 
         public Slot4 (BlockPos pos, BlockState state) {
@@ -98,7 +96,7 @@ public class TileEntityDrawersMore extends BlockEntityDrawers {
         }
     }
 
-    public static TileEntityDrawersMore createEntity(int slotCount, BlockPos pos, BlockState state) {
+    public static BlockEntityDrawersMore createEntity(int slotCount, BlockPos pos, BlockState state) {
         switch (slotCount) {
             case 1:
                 return new Slot1(pos, state);
@@ -125,7 +123,7 @@ public class TileEntityDrawersMore extends BlockEntityDrawers {
         if(getLevel() == null || !getLevel().isClientSide)
             return;
 
-        Minecraft.getInstance().tell(() -> TileEntityDrawersMore.this.clientUpdateItemAsync(slot, count));
+        Minecraft.getInstance().tell(() -> BlockEntityDrawersMore.this.clientUpdateItemAsync(slot, count));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -146,7 +144,7 @@ public class TileEntityDrawersMore extends BlockEntityDrawers {
     }
 
     private class GroupData extends StandardDrawerGroup {
-        private final LazyOptional<?> attributesHandler = LazyOptional.of(TileEntityDrawersMore.this::getDrawerAttributes);
+        private final LazyOptional<?> attributesHandler = LazyOptional.of(BlockEntityDrawersMore.this::getDrawerAttributes);
 
         public GroupData (int slotCount) {
             super(slotCount);
@@ -160,13 +158,13 @@ public class TileEntityDrawersMore extends BlockEntityDrawers {
 
         @Override
         public boolean isGroupValid() {
-            return TileEntityDrawersMore.this.isGroupValid();
+            return BlockEntityDrawersMore.this.isGroupValid();
         }
 
         @Nonnull
         @Override
         public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
-            if (capability == TileEntityDrawersMore.DRAWER_ATTRIBUTES_CAPABILITY) {
+            if (capability == BlockEntityDrawersMore.DRAWER_ATTRIBUTES_CAPABILITY) {
                 return attributesHandler.cast();
             }
             return super.getCapability(capability, facing);

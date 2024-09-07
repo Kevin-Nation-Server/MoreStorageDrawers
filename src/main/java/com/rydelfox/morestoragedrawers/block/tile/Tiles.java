@@ -12,15 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tiles {
-    public static BlockEntityType<TileEntityDrawersMore.Slot1> TILE_DRAWERS_1 = null;
-    public static BlockEntityType<TileEntityDrawersMore.Slot2> TILE_DRAWERS_2 = null;
-    public static BlockEntityType<TileEntityDrawersMore.Slot4> TILE_DRAWERS_4 = null;
+    public static BlockEntityType<BlockEntityDrawersMore.Slot1> TILE_DRAWERS_1 = null;
+    public static BlockEntityType<BlockEntityDrawersMore.Slot2> TILE_DRAWERS_2 = null;
+    public static BlockEntityType<BlockEntityDrawersMore.Slot4> TILE_DRAWERS_4 = null;
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MoreStorageDrawers.MOD_ID);
 
-    public static RegistryObject<BlockEntityType<? extends TileEntityDrawersMore>> MORE_DRAWERS_1 = BLOCK_ENTITY_TYPES.register("more_drawers_1", () -> TILE_DRAWERS_1);
-    public static RegistryObject<BlockEntityType<? extends TileEntityDrawersMore>> MORE_DRAWERS_2 = BLOCK_ENTITY_TYPES.register("more_drawers_2", () -> TILE_DRAWERS_2);
-    public static RegistryObject<BlockEntityType<? extends TileEntityDrawersMore>> MORE_DRAWERS_4 = BLOCK_ENTITY_TYPES.register("more_drawers_4", () -> TILE_DRAWERS_4);
+    public static RegistryObject<BlockEntityType<? extends BlockEntityDrawersMore>> MORE_DRAWERS_1 = BLOCK_ENTITY_TYPES.register("more_drawers_1", () -> TILE_DRAWERS_1);
+    public static RegistryObject<BlockEntityType<? extends BlockEntityDrawersMore>> MORE_DRAWERS_2 = BLOCK_ENTITY_TYPES.register("more_drawers_2", () -> TILE_DRAWERS_2);
+    public static RegistryObject<BlockEntityType<? extends BlockEntityDrawersMore>> MORE_DRAWERS_4 = BLOCK_ENTITY_TYPES.register("more_drawers_4", () -> TILE_DRAWERS_4);
 
     public static void initializeTiles() {
         MoreStorageDrawers.logInfo("MoreStorageDrawers: Registering Tile Entities");
@@ -52,8 +52,8 @@ public class Tiles {
             if (material.getDrawer(4, true) != null)
                 fourDrawers.add(material.getDrawer(4, true));
         }
-        TILE_DRAWERS_1 = (BlockEntityType.Builder.of((TileEntityDrawersMore.Slot1::new), oneDrawers.stream().toArray(BlockMoreDrawers[]::new)).build(null));
-        TILE_DRAWERS_2 = (BlockEntityType.Builder.of((TileEntityDrawersMore.Slot2::new), twoDrawers.stream().toArray(BlockMoreDrawers[]::new)).build(null));
-        TILE_DRAWERS_4 = (BlockEntityType.Builder.of((TileEntityDrawersMore.Slot4::new), fourDrawers.stream().toArray(BlockMoreDrawers[]::new)).build(null));
+        TILE_DRAWERS_1 = (BlockEntityType.Builder.of((BlockEntityDrawersMore.Slot1::new), oneDrawers.stream().toArray(BlockMoreDrawers[]::new)).build(null));
+        TILE_DRAWERS_2 = (BlockEntityType.Builder.of((BlockEntityDrawersMore.Slot2::new), twoDrawers.stream().toArray(BlockMoreDrawers[]::new)).build(null));
+        TILE_DRAWERS_4 = (BlockEntityType.Builder.of((BlockEntityDrawersMore.Slot4::new), fourDrawers.stream().toArray(BlockMoreDrawers[]::new)).build(null));
     }
 }
