@@ -68,7 +68,7 @@ public class Registration {
         if (event.includeServer()) {
             generator.addProvider(true, new DrawerRecipeProvider(packOutput));
             generator.addProvider(true, new ModBlockTagGenerator(packOutput, lookupProvider, helper));
-            //generator.addProvider(true, new DrawerLootTableProvider(packOutput));
+            generator.addProvider(true, new DrawerLootTableProvider(packOutput));
             //generator.addProvider(new DrawerTagsProvider(generator,helper));
         }
 
